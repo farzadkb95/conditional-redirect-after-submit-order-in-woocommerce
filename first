@@ -1,0 +1,30 @@
+// Redirect WooCommerce checkout page to a custom thank you page for md-sabz
+add_action( 'woocommerce_thankyou', 'fkb_redirect');
+function fkb_redirect( $order_id ){
+    $order = wc_get_order( $order_id );
+    foreach ($order_items as $item_id => $item) {
+        
+        // Get the item line total
+        $item_total = $order->get_item_meta($item_id, '_line_total', true);
+    
+             }
+
+
+    $totalkb=$order->get_formatted_order_total();
+$defualt_price_md=5000000;
+
+
+    $url_f = 'https://www.hamimohtava.com/';
+    $url_s = 'https://www.hamimohtava.com/s';
+
+    if (       $item_total > $defualt_price_md || $$item_total == $defualt_price_md ) {
+        wp_safe_redirect( $url_f );
+        exit;
+    }
+    else if (  $item_total < $defualt_price_md){
+
+        wp_safe_redirect( $url_s );
+        exit;
+    }
+
+}
